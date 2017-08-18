@@ -14,4 +14,5 @@ public class News {
 	public String from;
 	public String publish_time;
 	public int type=0; //0 为头条，1为百度
+	public int url_type;//0为http,1为https
 }

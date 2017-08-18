@@ -18,4 +18,6 @@ public class NewsDetial {
 	public List<Node> nodes;
 
 	public int type=0; //0 为头条，1为百度
+	
+	public int url_type;//0为http,1为https
 }

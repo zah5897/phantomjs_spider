@@ -144,6 +144,10 @@ public class NewsDetialPraser extends BaseSpider {
 			Elements spans = subs.get(0).select("span");
 			String timeStr = getTrimContent(spans.get(1));
 			time = DateTimeUtil.parseTouTiaoPublishTime(timeStr);
+			if (time == null) {
+				timeStr = getTrimContent(spans.get(2));
+				time = DateTimeUtil.parseTouTiaoPublishTime(timeStr);
+			}
 		}
 		Elements articles = doc.select("div.article-content");
 		if (articles.size() > 0) {

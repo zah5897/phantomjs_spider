@@ -22,7 +22,7 @@ import com.zhan.app.spider.util.SpiderPraser;
 import com.zhan.app.spider.util.SpringContextUtil;
 
 public class SpiderTouTiao {
-	public static String[] urls = new String[] { "http://www.toutiao.com/ch/news_society/"
+	public static String[] urls = new String[] { "https://www.toutiao.com/ch/news_society/"
 			,
 			"https://www.toutiao.com/ch/news_entertainment/" 
 			};

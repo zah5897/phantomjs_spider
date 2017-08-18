@@ -20,10 +20,16 @@ public class NewsService {
 	private NewsDao newsDao;
 
 	public String insert(News news) {
+		if (news.url.startsWith("https://")) {
+			news.url_type = 1;
+		}
 		return newsDao.save(news);
 	}
 
 	public long insert(NewsDetial news) {
+		if (news.detial_url.startsWith("https://")) {
+			news.url_type = 1;
+		}
 		newsDao.save(news);
 		return 0;
 	}
@@ -48,6 +54,7 @@ public class NewsService {
 	public List<News> getNewsByUrl(String url) {
 		return newsDao.getNewsByUrl(url);
 	}
+
 	public List<News> getNewsById(String id) {
 		return newsDao.getNewsByID(id);
 	}
@@ -56,6 +63,7 @@ public class NewsService {
 		// TODO Auto-generated method stub
 		newsDao.deleteByTitle(title);
 	}
+
 	public void deleteByID(String id) {
 		newsDao.deleteByID(id);
 	}

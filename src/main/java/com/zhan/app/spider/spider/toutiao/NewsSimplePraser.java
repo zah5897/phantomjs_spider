@@ -62,10 +62,16 @@ public class NewsSimplePraser extends BaseSpider {
 		news.icon = imageAndUrl[0];
 		if (imageAndUrl[1].startsWith("http")) {
 			news.url = imageAndUrl[1];
+			if(news.url.startsWith("http://")){
+				news.url="https"+news.url.substring(news.url.indexOf(":"));
+			}
 		} else {
-			news.url = "http://toutiao.com" + imageAndUrl[1];
+			news.url = "https://toutiao.com" + imageAndUrl[1];
 		}
 
+		if (news.url.startsWith("https://")) {
+			news.url_type = 1;
+		}
 		news.title = title;
 		news.news_abstract = abstractContent;
 		news.from = from;
@@ -86,6 +92,12 @@ public class NewsSimplePraser extends BaseSpider {
 		if (left_image.size() > 0) {
 			Element box_left = left_image.get(0);
 			image = box_left.attr("src");
+		}
+
+		if (!TextUtils.isEmpty(image)) {
+			if (!image.startsWith("http")) {
+				image = "http:" + image;
+			}
 		}
 
 		if (TextUtils.isEmpty(groupId) || TextUtils.isEmpty(image)) {
