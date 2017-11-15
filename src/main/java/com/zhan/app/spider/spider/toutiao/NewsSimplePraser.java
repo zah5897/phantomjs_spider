@@ -62,15 +62,8 @@ public class NewsSimplePraser extends BaseSpider {
 		news.icon = imageAndUrl[0];
 		if (imageAndUrl[1].startsWith("http")) {
 			news.url = imageAndUrl[1];
-			if(news.url.startsWith("http://")){
-				news.url="https"+news.url.substring(news.url.indexOf(":"));
-			}
 		} else {
-			news.url = "https://toutiao.com" + imageAndUrl[1];
-		}
-
-		if (news.url.startsWith("https://")) {
-			news.url_type = 1;
+			news.url = "http://toutiao.com" + imageAndUrl[1];
 		}
 		news.title = title;
 		news.news_abstract = abstractContent;

@@ -1,5 +1,8 @@
 package com.zhan.app.spider.spider;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
@@ -10,8 +13,16 @@ import com.zhan.app.spider.util.TextUtils;
 public class BaseSpider {
 	protected Node addTxtNode(String content) {
 		String temp = content.trim().replace(Jsoup.parse("&nbsp;").text(), "");
-		if (!TextUtils.isEmpty(temp)) {
-			return new Node(NodeType.TXT.ordinal(), temp);
+
+		Pattern p = Pattern.compile("\\<!--(.+)--\\>");
+		Matcher m = p.matcher(temp);
+		while (m.find()) {
+			String group=m.group();
+			temp=temp.replace(group, "");
+		}
+
+		if (!TextUtils.isEmpty(temp.trim())) {
+			return new Node(NodeType.TXT.ordinal(), temp.trim());
 		}
 		return null;
 	}

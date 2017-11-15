@@ -75,7 +75,7 @@ public class DateTimeUtil {
 		try {
 			return sdf.parse(strDate);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			System.err.println("time format error:strDate="+strDate);
 		}
 		return null;
 	}
