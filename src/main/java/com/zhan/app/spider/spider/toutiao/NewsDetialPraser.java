@@ -21,6 +21,7 @@ public class NewsDetialPraser extends BaseSpider {
 
 	private String baseUrl;
 
+	@SuppressWarnings("unchecked")
 	public NewsDetial prase(Document doc) {
 
 		NewsDetial newsDetial = new NewsDetial();
@@ -117,7 +118,6 @@ public class NewsDetialPraser extends BaseSpider {
 		try {
 			doc = SpiderPraser.spiderContentByJsoup(SpiderPraser.spiderByPhantomjs(url, "GBK"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (doc == null) {
@@ -197,7 +197,6 @@ public class NewsDetialPraser extends BaseSpider {
 			Document doc = SpiderPraser.spiderByJsoup("http://toutiao.com/group/6461524349555179790/");
 			new NewsDetialPraser().prase(doc);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

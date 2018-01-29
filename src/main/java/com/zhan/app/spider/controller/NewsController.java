@@ -106,7 +106,8 @@ public class NewsController {
 
 	@RequestMapping("list")
 	public List<News> list(HttpServletRequest request) {
-		List<News> list = (List<News>) newsService.list("", 20);
+		@SuppressWarnings("unchecked")
+		List<News> list = ((List<News>) newsService.list("", 20));
 		if (list != null) {
 			System.out.println(EncodeUtil.getEncoding(list.get(0).url));
 		}

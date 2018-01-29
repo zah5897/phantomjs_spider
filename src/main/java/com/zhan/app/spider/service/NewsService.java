@@ -35,6 +35,7 @@ public class NewsService {
 	}
 
 	public String insert(Video video) {
+		log.debug("");
 		return newsDao.save(video);
 	}
 
@@ -60,7 +61,6 @@ public class NewsService {
 	}
 
 	public void deleteByTitle(String title) {
-		// TODO Auto-generated method stub
 		newsDao.deleteByTitle(title);
 	}
 

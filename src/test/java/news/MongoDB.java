@@ -6,6 +6,7 @@ import com.mongodb.Mongo;
 import junit.framework.TestCase;
 
 public class MongoDB extends TestCase {
+	@SuppressWarnings("deprecation")
 	public void setUp() throws Exception {
 		// 创建一个MongoDB的数据库连接对象，无参数的话它默认连接到当前机器的localhost地址，端口是27017。
 		Mongo mongo = new Mongo("127.0.0.1", 27016);
