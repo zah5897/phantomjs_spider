@@ -45,8 +45,7 @@ public class SpiderTouTiao {
 		}
 	}
 
-	private String getRandomUrl() {
-		int index = new Random().nextInt(urls.length);
+	private String getRandomUrl(int index) {
 		return urls[index];
 	}
 
@@ -55,7 +54,8 @@ public class SpiderTouTiao {
 	}
 
 	public void start() {
-		String url = getRandomUrl();
+		int index = new Random().nextInt(urls.length);
+		String url = getRandomUrl(index);
 		List<News> newsList = null;
 		try {
 			System.out.println(url);
@@ -67,6 +67,7 @@ public class SpiderTouTiao {
 			return;
 		}
 		for (News news : newsList) {
+			news.sub_type=index;
 			// 检测是否已经解析，有的话下一个
 			if (getNewsService().hasExist(news)) {
 				System.out.println("url=" + news.url);
@@ -102,6 +103,7 @@ public class SpiderTouTiao {
 		if (detialNews == null) {
 			return;
 		}
+		detialNews.sub_type=news.sub_type;
 		detialNews.title = news.title;
 		detialNews.from = news.from;
 		news.publish_time = detialNews.publish_time;

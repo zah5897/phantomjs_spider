@@ -194,7 +194,7 @@ public class NewsDetialPraser extends BaseSpider {
 
 		//
 		try {
-			Document doc = SpiderPraser.spiderByJsoup("http://toutiao.com/group/6461524349555179790/");
+			Document doc = SpiderPraser.spiderByJsoup("http://m.happyjuzi.com/article/183103.html?view=27&pf=android&d_source=toutiao&tt_group_id=6516264837410980360");
 			new NewsDetialPraser().prase(doc);
 		} catch (IOException e) {
 			e.printStackTrace();
