@@ -93,12 +93,18 @@ public class SpiderTouTiao {
 		RedisTemplate<String, Object> redisTemplate = SpringContextUtil.getBean("redisTemplate");
 
 		Document doc = SpiderPraser.spiderByJsoup(news.url);
-		if (!doc.text().contains(news.title)) {
-			System.out.println("文不对题！");
-			System.out.println(news.title);
-			System.out.println(news.url);
-			throw new RuntimeException("文不对题");
-		}
+		
+		
+		System.out.println(doc.text());
+		
+//		if (!doc.text().contains(news.title)) {
+//			System.out.println("文不对题！");
+//			System.out.println(news.title);
+//			System.out.println(news.url);
+//			throw new RuntimeException("文不对题");
+//		}
+		
+		
 		NewsDetial detialNews = detialPraser.prase(doc);
 		if (detialNews == null) {
 			return;

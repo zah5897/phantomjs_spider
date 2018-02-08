@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/redis/spring-redis.xsd">
 
 
-	<context:property-placeholder location="classpath:redis.properties" />
+	<context:property-placeholder location="classpath:config.properties" />
  
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.maxIdle}" />

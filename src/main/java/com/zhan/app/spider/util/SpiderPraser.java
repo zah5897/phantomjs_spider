@@ -63,9 +63,16 @@ public class SpiderPraser {
 	}
 
 	public static  synchronized String spiderByPhantomjs(String url,String encode) throws IOException {
-		String parentPath = "D:\\soft\\phantomjs-2.1.1-windows\\bin\\";
+		String parentPath = getPhantomjsPath();
 		Runtime rt = Runtime.getRuntime();
-		Process p = rt.exec(parentPath + "phantomjs.exe " + parentPath + "codes_encode.js " + url+" "+encode);
+		Process p=null;
+		if(SysUtil.isLinux()) {
+			  p = rt.exec(parentPath + "phantomjs " + parentPath + "codes_encode.js " + url+" "+encode);
+		}else {
+			  p = rt.exec(parentPath + "phantomjs.exe " + parentPath + "codes_encode.js " + url+" "+encode);
+		}
+		
+//		Process p = rt.exec(parentPath + "phantomjs.exe " + parentPath + "codes_encode.js " + url+" "+encode);
 		InputStream is = p.getInputStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		StringBuffer sbf = new StringBuffer();
@@ -86,5 +93,16 @@ public class SpiderPraser {
 	public static synchronized  Document spiderContentByJsoup(String content) throws IOException {
 		Document doc = Jsoup.parse(content);
 		return doc;
+	}
+	
+	
+	
+	public static String getPhantomjsPath() {
+	     if(SysUtil.isLinux()) {
+	    	 return "/data/zah/soft/phantomjs-2.1.1-linux-x86_64/bin/";
+	     }else {
+	    	 return "D:\\soft\\phantomjs-2.1.1-windows\\bin\\";
+	     }
+	     
 	}
 }
