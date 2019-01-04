@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -15,7 +14,6 @@ import com.zhan.app.spider.spider.BaseSpider;
 import com.zhan.app.spider.util.TextUtils;
 
 public class NewsSimplePraser extends BaseSpider {
-	private static Logger log = Logger.getLogger(NewsSimplePraser.class);
 
 	public List<News> prase(Document doc) throws IOException {
 		List<News> newsList = new ArrayList<News>();

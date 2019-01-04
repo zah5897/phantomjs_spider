@@ -10,8 +10,12 @@ import com.zhan.app.spider.util.TextUtils;
 
 public class AnybodyAppPush extends BaseAppPush {
 
-	public AnybodyAppPush(String keyStoryName,String aid, String connectionName) {
-		super(keyStoryName,aid, connectionName);
+	public AnybodyAppPush(String keyStoryName, String aid, String connectionName, boolean isDis) {
+		super(keyStoryName, aid, connectionName, isDis);
+	}
+
+	public AnybodyAppPush(String keyStoryName, String aid, String connectionName) {
+		super(keyStoryName, aid, connectionName, true);
 	}
 
 	@Override
@@ -25,8 +29,8 @@ public class AnybodyAppPush extends BaseAppPush {
 		}
 		int pageSize = 1000;
 		long pageNumber = count / 1000;
-		if(pageNumber<1){
-			pageNumber=1;
+		if (pageNumber < 1) {
+			pageNumber = 1;
 		}
 		for (int i = 0; i < pageNumber; i++) {
 			int skip = i * pageSize;
@@ -39,7 +43,7 @@ public class AnybodyAppPush extends BaseAppPush {
 			JSONObject object = createJson(news);
 			if (users != null && users.size() > 0) {
 				for (User user : users) {
-					 setToken(object, user);
+					setToken(object, user);
 					try {
 						leftPush(object.toJSONString());
 					} catch (Exception e) {

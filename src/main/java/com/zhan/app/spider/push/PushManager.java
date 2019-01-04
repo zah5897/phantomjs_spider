@@ -26,15 +26,17 @@ public class PushManager {
 		pushItems = new ArrayList<BaseAppPush>();
 		// 新版手机找人
 		pushItems.add(new AnybodyAppPush("AW_findGps_1225814802", "1225814802", "push_news_user"));
-		pushItems.add(new AnybodyAppPush("mp_findGps_1236362107", "1236362107", "push_news_user"));
+		pushItems.add(new AnybodyAppPush("com.magicpocket.findgps_1236362107", "1236362107", "push_news_user"));
 		// 旧版新闻推送
-		pushItems.add(new NewsAppPush("AW_FindU_843144601", "843144601", "push_news_user"));
+		pushItems.add(new NewsAppPush("com.awakeapps.findu_843144601", "843144601", "push_news_user"));
 
 		// 其他
-		pushItems.add(new NewsAppPush("news_look_for", null, "push_news_user_look_for"));
+		pushItems.add(new NewsAppPush("com.bigpang.findu.1142140507", null, "push_news_user_look_for"));
 		pushItems.add(new NewsAppPush("news_dao_hang", null, "push_daohang_user"));
 		pushItems.add(new NewsAppPush("news_mobile_browser", null, "push_mobile_browser_user"));
 		pushItems.add(new NewsAppPush("mp_findu", null, "push_findu"));
+//		pushItems.add(new NewsAppPush("com.magicpocket.SportOnline_436670930", null, "push_findu"));
+		pushItems.add(new NewsAppPush("com.awakeapps.nearby_1178548652", "1178548652", "push_news_user",false));
 		index = new Random().nextInt(pushItems.size());
 	}
 

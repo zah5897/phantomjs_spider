@@ -13,61 +13,73 @@ import com.zhan.app.spider.util.RedisKeys;
 import com.zhan.app.spider.util.SpringContextUtil;
 import com.zhan.app.spider.util.TextUtils;
 
-public class BaseAppPush {
-	
-   protected String keyStoryName;
-   protected String connectionName;
-   protected String aid;
-   protected long lastPushTime = 0;
-   public static final int MIX_TIME_EVERY=45;
-   
-   protected int  whileCount = 0;
-   
-   
-   public BaseAppPush(String keyStoryName,String aid,String connectionName){
-	    this.keyStoryName=keyStoryName;
-	    this.connectionName=connectionName;
-	    this.aid=aid;
-   }
-   
-   public void push(News news){
-   }
-   
-   protected boolean canPush(){
-	   return ((System.currentTimeMillis()/1000/60)-lastPushTime)>MIX_TIME_EVERY;
-   }
-   
-   public List<User> getAllUer(){
-	  return null;   
-   }
-   protected void leftPush(String txt) {
+public abstract class BaseAppPush {
+
+	protected String keyStoryName;
+	protected String connectionName;
+	protected String aid;
+	protected long lastPushTime = 0;
+	public static final int MIX_TIME_EVERY = 45;
+
+	protected int whileCount = 0;
+
+	protected boolean isDis;
+
+	public BaseAppPush(String keyStoryName, String aid, String connectionName, boolean isDis) {
+		this.keyStoryName = keyStoryName;
+		this.connectionName = connectionName;
+		this.aid = aid;
+		this.isDis = isDis;
+	}
+
+	public BaseAppPush(String keyStoryName, String aid, String connectionName) {
+		this.keyStoryName = keyStoryName;
+		this.connectionName = connectionName;
+		this.aid = aid;
+		this.isDis = true;
+	}
+
+	public abstract void push(News news);
+
+	protected boolean canPush() {
+		return ((System.currentTimeMillis() / 1000 / 60) - lastPushTime) > MIX_TIME_EVERY;
+	}
+
+	public List<User> getAllUer() {
+		return null;
+	}
+
+	protected void leftPush(String txt) {
 		getRedisTemplate().opsForList().leftPush(RedisKeys.KEY_NEWS_PUSH, txt);
 	}
-   private RedisTemplate<String, String> getRedisTemplate() {
+
+	private RedisTemplate<String, String> getRedisTemplate() {
 		return SpringContextUtil.getBean("redisTemplate");
-   }
-   protected UserService getUserService() {
+	}
+
+	protected UserService getUserService() {
 		return SpringContextUtil.getBean("userService");
-   }
-   
-   protected JSONObject createJson(News news){
-	   JSONObject object = new JSONObject();
+	}
+
+	protected JSONObject createJson(News news) {
+		JSONObject object = new JSONObject();
 		String title = news.title;
 		object.put("id", news.id);
 		object.put("alert", title);
 		object.put("app_name", keyStoryName);
 		return object;
-   }
+	}
 
-   protected void setToken(JSONObject object,User user){
-	   object.put("token", user.getToken());
-	   object.put("time", getPushTime()); // 精度分钟
-   }
-   protected long getPushTime() {
+	protected void setToken(JSONObject object, User user) {
+		object.put("token", user.getToken());
+		object.put("time", getPushTime()); // 精度分钟
+	}
+
+	protected long getPushTime() {
 		return System.currentTimeMillis();
-   }
-   
-   protected void errorPush(List<User> errorUsers, JSONObject newsObj) {
+	}
+
+	protected void errorPush(List<User> errorUsers, JSONObject newsObj) {
 		whileCount++;
 		if (errorUsers.size() == 0 || newsObj == null) {
 			return;
