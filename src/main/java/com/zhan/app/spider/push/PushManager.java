@@ -34,8 +34,9 @@ public class PushManager {
 		pushItems.add(new NewsAppPush("com.bigpang.findu.1142140507", null, "push_news_user_look_for"));
 		pushItems.add(new NewsAppPush("news_dao_hang", null, "push_daohang_user"));
 		pushItems.add(new NewsAppPush("news_mobile_browser", null, "push_mobile_browser_user"));
-		pushItems.add(new NewsAppPush("mp_findu", null, "push_findu"));
-//		pushItems.add(new NewsAppPush("com.magicpocket.SportOnline_436670930", null, "push_findu"));
+//		pushItems.add(new NewsAppPush("mp_findu", null, "push_findu"));
+		pushItems.add(new NewsAppPush("com.magicpocket.SportOnline_436670930", null, "push_findu"));
+		
 		pushItems.add(new NewsAppPush("com.awakeapps.nearby_1178548652", "1178548652", "push_news_user",false));
 		index = new Random().nextInt(pushItems.size());
 	}
